@@ -28,11 +28,6 @@ nav ul a{
     text-decoration: none;
 }
 
-nav a:hover{
-    text-decoration: underline;
-
-}
-
 nav ul li {
     list-style: none;
 }
@@ -49,9 +44,15 @@ nav ul {
     font-weight: 700;
 }
 
+.navlists a:hover {
+    text-decoration: underline;
+}
+
 nav h1 {
     font-size: 1.4rem;
 }
+
+
 
 h1, h2, h3 {
     font-size: 2rem;
