@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members page</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('../partials/navbar.ejs')%>
+    <section class="members">
+        <h1>So you want to join this club</h1>
+        <p>This is a club where you can <em>join</em> the club, you are allowed to <em>join</em> this club if you have the passkey or the secret code.</p>
+        <p>if you are new to here or doesn't have a passkey just re-read this paragraphs and search the passkey.</p>
+        <p>If you have the secret passkeys insert the input below</p>
+        <div class="joinForm">
+            <label for="join">Insert the keys here: </label>
+            <input type="text" id="join" name="join" placeholder="Insert the Passkey">
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </section>
+
+</body>
+</html>

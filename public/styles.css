@@ -1,9 +1,13 @@
 :root{
     --light-cl: hsl(231, 37%, 93%);
     --light-cl-2: hsl(73, 76%, 95%);
+    --light-cl-3: hsl(183, 76%, 95%);
     --white-cl: #fff;
     --black-cl: #000;
     --submit-btn-cl: rgb(5, 140, 243);
+    --primary: rgb(20, 110, 180);
+    --sigin: rgb(13, 161, 80);
+    --sigup: rgb(131, 77, 240);
     --light-black: hsl(265, 51%, 7%);
 }
 
@@ -72,6 +76,13 @@ h1, h2, h3 {
     padding-top: 1rem;
 }
 
+.error {
+    list-style: none;
+    margin: 0.5rem 2rem;
+    color: red;
+    font-size: 1.2rem;
+}
+
 .form form {
     display: flex;
     flex-direction: column;
@@ -114,6 +125,8 @@ input {
     transform: translate(3px, -3px);
 }
 
+/* message style starts here */
+
 .messages {
     width: min(80%, 500px);
     height: fit-content;
@@ -128,8 +141,124 @@ input {
     box-shadow: 2px 3px 7px -1px var(--light-black);
 }
 .messages h2 {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
 }
 .messageData {
     font-size: 1.25rem;
+}
+
+.dltBtn {
+    display: block;
+    width: 130px;
+    margin: .5rem auto;
+    text-decoration: none;
+    background-color: rgb(255, 66, 66);
+}
+
+.dltBtn:hover {
+    transform: translate(2px, -2px);
+    background-color: hsl(0, 90%, 53%);
+}
+
+.create  {
+    text-decoration: none;
+    width: 110px;
+    background-color: var(--sigup);
+    color: white;
+    padding: .5rem .7rem;
+    border-radius: .4rem;
+    display: block;
+    margin: .4rem auto;
+}
+/* index css starts here */
+.intro {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+    gap: 3rem;
+    background-color: var(--light-cl);
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    flex-wrap: wrap;
+}
+.intro p {
+    width: min(40vw, 60ch);
+}
+
+.intro img {
+    width: min(250px, 500px);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.cta {
+    width: min(200px, 140px);
+    height: 5rem;
+    text-decoration: none;
+    padding: .5rem .6rem;
+    margin: 1rem 0;
+    color: white;
+    border-radius: .3rem;
+}
+.primary {
+    background-color: var(--primary);
+}
+.signin {
+    background-color: var(--sigin);
+}
+.signup {
+    background-color: var(--sigup);
+}
+
+.primary:hover {
+    background-color: hsl(206, 96%, 41%);
+}
+.signin:hover {
+    background-color:  hsl(147, 85%, 30%);
+}
+.signup:hover {
+    background-color: hsl(260, 84%, 58%);
+}
+
+.messagesContainer{
+    background-color: var(--light-cl-3);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.messagesContainer .h2 {
+    text-align: center;
+}
+
+/* members join here  */
+
+.members{
+    background-color: var(--light-cl-3);
+    margin: 2rem 1rem; 
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+em {
+    font-weight: 700;
+}
+
+.members h1 {
+    text-align: center;
+
+}
+
+.joinForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: .5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }

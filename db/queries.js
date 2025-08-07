@@ -16,3 +16,15 @@ export const getUserByUsername = async (username) => {
 export const getAllMessages= async () => {
    return  await pool.query('select * from messages join users on messages.userid = users.id', )
 }
+
+export const addNewMessages = async (message, userId) =>{
+    return await pool.query('insert into messages (message, userid) values ($1, $2)', [message, userId])
+}
+
+export const getAdmin = async (id) => {
+    return await pool.query('select * from users where id = $1', [id])
+}
+
+export const deleteMessage = async (id) => {
+    return await pool.query('delete from messages where mess_id = $1', [id])
+}

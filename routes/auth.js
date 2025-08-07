@@ -9,7 +9,7 @@ import { addNewUsers, getUserByUsername } from "../db/queries.js";
 const authRouter = Router()
 
 authRouter.get('/login', (req, res) => {
-    res.render('login', { errors: []})
+    res.render('./auth/login', { errors: []})
 })
 
 authRouter.post('/login',
@@ -37,7 +37,6 @@ authRouter.post('/login',
             req.logIn(user, (err) => {
                 if (err) return next(err);
 
-                // ✅ Set your custom session data here
                 req.session.data = {
                     username: user.username,
                     user_id: user.user_id
@@ -49,13 +48,13 @@ authRouter.post('/login',
     }
 );
 
-
 authRouter.get('/signup', (req, res) => {
-    res.render('signup')
+    res.render('./auth/signup')
 })
 
 authRouter.post('/signup', async (req, res, next) => {
     const {firstname, lastname, username} = req.body
+    
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         await addNewUsers(firstname, lastname, username, hashedPassword)
@@ -71,4 +70,10 @@ authRouter.get('/logout', (req, res, next) => {
       
     res.redirect('/auth/login')
 })
+
+authRouter.get('/join', (req, res) => {
+    res.render('./auth/members')
+})
+
+
 export default authRouter;

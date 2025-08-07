@@ -11,6 +11,13 @@
 <body>
     <div class="form">
         <h2>Please login</h2>
+        <% if(errors && errors.length > 0 ) { %>
+                <ul>
+                    <% errors.forEach(function (err) {  %>
+                        <li class="error"><%= err.msg%></li>
+                    <%})%>
+                </ul>
+          <%}%>
         <form action="/auth/login" method="post">
             <label for="username">Username</label>
             <input type="text" name="username" placeholder="username" id="username" required>
@@ -18,6 +25,7 @@
             <input type="password" name="password" id="password" required minlength="8">
             <button type="submit" class="btn submit">Submit</button>
         </form>
+          
     </div>
 </body>
 

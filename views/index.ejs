@@ -6,9 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <a href="/auth/login">login</a>
-    <a href="/auth/signup">signup</a>
-    <a href="/auth/logout">Logout</a>
+    <%- include('./partials/navbar.ejs')%>
+    <!-- <h1 class="introHead">Welcome To Destiny Club Hosue</h1> -->
+    <section class="intro">
+        <div class="info">
+            <h1>Destiny Club House</h1>
+            <p>Join this club see the fun, share a story, or consume one <br> <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi consequatur totam suscipit eligendi, voluptas minima nisi similique.</span></p>
+            <div class="btns">
+                <a href="/auth/member" class="cta primary">Membership</a>
+                <a href="/auth/login" class="cta signin">Log-in</a>
+                <a href="/auth/signup" class="cta signup">Sign-up</a>
+            </div>
+        </div>
+        <img src="/img/community.svg" alt="community">
+    </section>
+
+    <section class="messagesContainer"> 
+        <h2 class="h2">All Messages</h2>
+        <% messages.forEach(msg => { %>
+        <div class="messages">
+             <h2>anonymous</h2>
+            <p>@*********</p>
+            <p><%= dayjs(msg.created_at).fromNow() %></p>
+            <p class="messageData"><%= msg.message%></p>
+        </div>
+    <% }) %>
+    </section>
+  
 </body>
 </html>
