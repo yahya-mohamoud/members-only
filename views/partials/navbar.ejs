@@ -11,8 +11,20 @@
     <ul>
         <h1><a href="/">Destiny Club House</a></h1>
             <div class="navlists">
+                <% if(isMember === true) {%>
+                    <li><a href="/messages">Messages</a></li>
+                <%} else {%>
                 <li><a href="/auth/join">Join Club</a></li>
-                <li><a href="/auth/logout">Logout</a></li>
+                <% }%>
+                <div class="profile">
+                    <img class="profile" src="/img/profile.png" alt="">
+                    <div class="hidden">
+
+                        <h5>welcome <%= user.firstname.toUpperCase()%></h5>
+                        <!-- <h5>@<%= user.username%></h5> -->
+                        <h5><a href="/auth/logout">Logout</a></h5>
+                    </div>
+                </div>
             </div>
     </ul>
 </nav>

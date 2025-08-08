@@ -7,12 +7,10 @@ import pool from './db/pool.js'
 import passport from 'passport'
 import passportConfig from './utils/passport.config.js'
 import MessRouter from './routes/messages.js'
-import { checkMembership, getAdmin, getAllMessages } from './db/queries.js'
-import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime.js'
+
 import path from 'path'
 import { fileURLToPath } from 'url'
-dayjs.extend(relativeTime)
+import { home } from './routes/home.js'
 
 dotenv.config()
 
@@ -45,20 +43,12 @@ app.use(passport.session())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.get('/',  async (req, res) => {
-    const { rows } = await getAllMessages()
-    const id = req.user.id
-    const {membership} = await checkMembership(id)
-    const result = await getAdmin(id) 
-    if(result.rows[0] === true) {
-        res.render('index', { messages: rows, dayjs: dayjs, isMember: membership, admin: true})
-    } else {
-        res.render('index', { messages: rows, dayjs: dayjs, isMember: membership, admin: false})
-    }
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 
-    
-}) 
-
+app.get('/',  home) 
 app.use('/auth', authRouter)
 app.use('/messages', MessRouter)
 

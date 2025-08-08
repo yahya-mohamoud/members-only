@@ -38,8 +38,8 @@
             <p>@*********</p>
             <p><%= dayjs(msg.created_at).fromNow() %></p>
             <p class="messageData"><%= msg.message%></p>
-            <%if(admin === true) {%>
-                <a href="/messages/delete/<%= msg.mess_id%>" class="btn dltBtn">Delete messages</a>
+             <%if(admin === true) {%>
+                <a href="/messages/delete/<%= d.mess_id%>" class="btn dltBtn">Delete messages</a>
             <%}%>
             <%}%>
         </div>

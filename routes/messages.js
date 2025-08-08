@@ -9,16 +9,19 @@ MessRouter.use(checkAuth)
 
 MessRouter.get('/',async (req, res) => {
     const adminId = req.user.id;
+    const user = req.user;
+    
     const result = await getAdmin(adminId)
+    const isAdmin = result.rows[0].admin;
+    
     const {rows} = await getAllMessages()
 
     const {membership} = await checkMembership(adminId)
-    console.log(result.rows[0]);
     
-    if(result.rows[0].admin === true) {
-        res.render('./messages/messages', {data: rows, dayjs: dayjs, admin: true, isMember: membership})
+    if(result.rows[0].admin) {
+        res.render('./messages/messages', {data: rows, dayjs: dayjs, admin: isAdmin, isMember: membership, user: user})
     } else {
-        res.render( './messages/messages', {data: rows, dayjs: dayjs, admin: false, isMember: membership})
+        res.render( './messages/messages', {data: rows, dayjs: dayjs, admin: isAdmin, isMember: membership, user: user})
     }
     
 })

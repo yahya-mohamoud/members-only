@@ -17,7 +17,7 @@ authRouter.post('/login',
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(401).render('login', {
+            return res.status(401).render('./auth/login', {
                 errors: errors.array(),
                 user: req.body.username
             });
@@ -28,7 +28,7 @@ authRouter.post('/login',
         passport.authenticate('local', (err, user, info) => {
             if (err) return next(err);
             if (!user) {
-                return res.status(401).render('login', {
+                return res.status(401).render('./auth/login', {
                     errors: [{ msg: 'Invalid username or password' }],
                     user: req.body.username
                 });
@@ -72,24 +72,26 @@ authRouter.get('/logout', (req, res, next) => {
 })
 
 authRouter.get('/join', (req, res) => {
-    res.render('./auth/members', {msg: '', isMember: ''})
+    const user = req.user;
+    res.render('./auth/members', {msg: '', isMember: false, user: user})
 })
 
 authRouter.post('/join', async (req, res) => {
     const { passkey } = req.body;
     const id = req.user.id;
-    
+    const user = req.user;
     const {membership} = await checkMembership(id);
-    
-    if (passkey === 'join' && membership == false) {
+    const result = await checkMembership(id);
+        
+    if (passkey === 'join' && membership === false) {
         await updateMembership(id)
         
         res.redirect('/messages')
 
     } else if( membership == true && passkey == 'join')  {
-        res.render('./auth/members', {msg: 'members can\'t rejoin, you are already a member'})
+        res.render('./auth/members', {msg: 'members can\'t rejoin, you are already a member', user: user, isMember: membership})
     } else if (passkey !== 'join') {
-        res.render('./auth/members', {msg: 'Incorrect passkey, please try again'})
+        res.render('./auth/members', {msg: 'Incorrect passkey, please try again', user: user, isMember: membership})
     }
     
 

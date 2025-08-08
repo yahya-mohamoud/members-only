@@ -20,7 +20,7 @@
 body{
    background-color: var(--white-cl);
 }
-
+/* navbar styles */
 nav{
     background-color: var(--light-cl-2);
     padding: 0.81rem;
@@ -46,6 +46,7 @@ nav ul {
     gap: 1rem;
     font-size: 1.2rem;
     font-weight: 700;
+    align-items: center;
 }
 
 .navlists a:hover {
@@ -55,8 +56,41 @@ nav ul {
 nav h1 {
     font-size: 1.4rem;
 }
+.hidden {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 100%; /* dropdown appears below image */
+    left: -50%;
+    transform: translateX(-50%);
+    background-color: var(--light-cl-3);
+    padding: 0.4rem;
+    z-index: 10;
+    min-width: 140px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    padding: .2rem;
+    display: inline-block;
+}
 
+.profile:hover .hidden{
+    display: block;
+    opacity: 1;
+}
 
+.hidden a {
+    text-decoration: underline;
+    display: block;
+    margin: 1px auto;
+}
+
+/* navbar styles ends here */
 
 h1, h2, h3 {
     font-size: 2rem;

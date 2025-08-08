@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <%- include('../partials/navbar.ejs') %>
+    <%- include('../partials/navbar.ejs', {user: user}) %>
     <% data.forEach(d => { %>
         <div class="messages">
             <% if(isMember === true && isMember !== '') {%>
@@ -15,7 +15,7 @@
             <p>@ <%= d.username%></p>
             <p><%= dayjs(d.created_at).fromNow() %></p>
             <p class="messageData"><%= d.message%></p>
-            <%if(admin === true) {%>
+            <%if(admin) {%>
                 <a href="/messages/delete/<%= d.mess_id%>" class="btn dltBtn">Delete messages</a>
             <%}%>
             <%} else {%>
@@ -23,7 +23,7 @@
             <p>@*********</p>
             <p><%= dayjs(d.created_at).fromNow() %></p>
             <p class="messageData"><%= d.message%></p>
-            <%if(admin.admin === true) {%>
+            <%if(admin) {%>
                 <a href="/messages/delete/<%= d.mess_id%>" class="btn dltBtn">Delete messages</a>
             <%}%>
             <%}%>

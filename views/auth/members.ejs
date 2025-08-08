@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <%- include('../partials/navbar.ejs')%>
+    <%- include('../partials/navbar.ejs',{ user: user })%>
     <section class="members">
         <h1>So you want to join this club</h1>
         <p>Destiny Club House is a club you can <em>join</em>, you are allowed to <em>join</em> this club if you have the passkey or the secret code.</p>
@@ -17,6 +17,7 @@
                 <label for="join">Insert the keys here: </label>
                 <%if(msg !== undefined && msg !== '') {%>
                     <li class="err"><%= msg %></li>
+                    <p><a href="/messages">see messages here</a></p>
                 <%}%>
                 <input type="text" id="join" name="passkey" placeholder="Insert the Passkey">
                 <button type="submit" class="btn">Submit</button>
