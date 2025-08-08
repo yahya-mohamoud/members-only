@@ -13,7 +13,7 @@
             <h1>Destiny Club House</h1>
             <p>Join this club see the fun, share a story, or consume one <br> <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi consequatur totam suscipit eligendi, voluptas minima nisi similique.</span></p>
             <div class="btns">
-                <a href="/auth/member" class="cta primary">Membership</a>
+                <a href="/messages" class="cta primary">Messages</a>
                 <a href="/auth/login" class="cta signin">Log-in</a>
                 <a href="/auth/signup" class="cta signup">Sign-up</a>
             </div>
@@ -24,11 +24,24 @@
     <section class="messagesContainer"> 
         <h2 class="h2">All Messages</h2>
         <% messages.forEach(msg => { %>
-        <div class="messages">
-             <h2>anonymous</h2>
+          <div class="messages">
+            <% if(isMember === true && isMember !== '') {%>
+            <h2><%= msg.firstname.toUpperCase() + " " + msg.lastname.toUpperCase()%></h2>
+            <p>@ <%= msg.username%></p>
+            <p><%= dayjs(msg.created_at).fromNow() %></p>
+            <p class="messageData"><%= msg.message%></p>
+            <%if(admin === true) {%>
+                <a href="/messages/delete/<%= msg.mess_id%>" class="btn dltBtn">Delete messages</a>
+            <%}%>
+            <%} else {%>
+              <h2>Anonymous</h2>
             <p>@*********</p>
             <p><%= dayjs(msg.created_at).fromNow() %></p>
             <p class="messageData"><%= msg.message%></p>
+            <%if(admin === true) {%>
+                <a href="/messages/delete/<%= msg.mess_id%>" class="btn dltBtn">Delete messages</a>
+            <%}%>
+            <%}%>
         </div>
     <% }) %>
     </section>

@@ -72,27 +72,23 @@ authRouter.get('/logout', (req, res, next) => {
 })
 
 authRouter.get('/join', (req, res) => {
-    res.render('./auth/members', {msg: ''})
+    res.render('./auth/members', {msg: '', isMember: ''})
 })
 
 authRouter.post('/join', async (req, res) => {
     const { passkey } = req.body;
     const id = req.user.id;
-    console.log(passkey, id);
     
-    console.log(await checkMembership(id));
     const {membership} = await checkMembership(id);
     
     if (passkey === 'join' && membership == false) {
-        console.log('hi niggas');
         await updateMembership(id)
+        
         res.redirect('/messages')
 
     } else if( membership == true && passkey == 'join')  {
-        // console.log('nigga you are a member');
-        res.render('./auth/members', {msg: 'members can\'t rejoin, you are a member'})
+        res.render('./auth/members', {msg: 'members can\'t rejoin, you are already a member'})
     } else if (passkey !== 'join') {
-        // console.log('you are in the wrong side of the story');
         res.render('./auth/members', {msg: 'Incorrect passkey, please try again'})
     }
     

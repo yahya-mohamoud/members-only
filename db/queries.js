@@ -22,7 +22,7 @@ export const addNewMessages = async (message, userId) =>{
 }
 
 export const getAdmin = async (id) => {
-    return await pool.query('select * from users where id = $1', [id])
+    return await pool.query('select admin from users where id = $1', [id])
 }
 
 export const deleteMessage = async (id) => {

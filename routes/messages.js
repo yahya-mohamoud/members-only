@@ -11,16 +11,14 @@ MessRouter.get('/',async (req, res) => {
     const adminId = req.user.id;
     const result = await getAdmin(adminId)
     const {rows} = await getAllMessages()
-    // const member = await checkMembership(id)
 
-
-
+    const {membership} = await checkMembership(adminId)
+    console.log(result.rows[0]);
+    
     if(result.rows[0].admin === true) {
-        res.render('./messages/messages', {data: rows, dayjs: dayjs, admin: true})
-    // } else if (member){
-    //     res.render('./messages/messages', {})
+        res.render('./messages/messages', {data: rows, dayjs: dayjs, admin: true, isMember: membership})
     } else {
-        res.render( './messages/messages', {data: rows, dayjs: dayjs, admin: false})
+        res.render( './messages/messages', {data: rows, dayjs: dayjs, admin: false, isMember: membership})
     }
     
 })

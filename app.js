@@ -7,7 +7,7 @@ import pool from './db/pool.js'
 import passport from 'passport'
 import passportConfig from './utils/passport.config.js'
 import MessRouter from './routes/messages.js'
-import { getAllMessages } from './db/queries.js'
+import { checkMembership, getAdmin, getAllMessages } from './db/queries.js'
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js'
 import path from 'path'
@@ -47,7 +47,15 @@ app.use(express.urlencoded({ extended: false }))
 
 app.get('/',  async (req, res) => {
     const { rows } = await getAllMessages()
-    res.render('index', { messages: rows, dayjs: dayjs})
+    const id = req.user.id
+    const {membership} = await checkMembership(id)
+    const result = await getAdmin(id) 
+    if(result.rows[0] === true) {
+        res.render('index', { messages: rows, dayjs: dayjs, isMember: membership, admin: true})
+    } else {
+        res.render('index', { messages: rows, dayjs: dayjs, isMember: membership, admin: false})
+    }
+
     
 }) 
 
@@ -55,5 +63,5 @@ app.use('/auth', authRouter)
 app.use('/messages', MessRouter)
 
 const PORT = process.env.PORT;
-app.listen(3000, () => console.log(`server started on PORT: 3000`))
+app.listen(PORT, () => console.log(`server started on PORT: ${PORT}`))
 
