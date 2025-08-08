@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewMessages, deleteMessage, getAdmin, getAllMessages } from "../db/queries.js";
+import { addNewMessages, checkMembership, deleteMessage, getAdmin, getAllMessages } from "../db/queries.js";
 import { checkAuth } from "../middlewares.js";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime.js'
@@ -11,9 +11,14 @@ MessRouter.get('/',async (req, res) => {
     const adminId = req.user.id;
     const result = await getAdmin(adminId)
     const {rows} = await getAllMessages()
+    // const member = await checkMembership(id)
+
+
 
     if(result.rows[0].admin === true) {
         res.render('./messages/messages', {data: rows, dayjs: dayjs, admin: true})
+    // } else if (member){
+    //     res.render('./messages/messages', {})
     } else {
         res.render( './messages/messages', {data: rows, dayjs: dayjs, admin: false})
     }

@@ -262,3 +262,7 @@ em {
     gap: .5rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.err {
+    color: red;
+}

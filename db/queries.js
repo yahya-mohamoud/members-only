@@ -28,3 +28,12 @@ export const getAdmin = async (id) => {
 export const deleteMessage = async (id) => {
     return await pool.query('delete from messages where mess_id = $1', [id])
 }
+
+export const updateMembership = async (id) => {
+    return await pool.query('update users set membership = true where id = $1', [id])
+}
+
+export const checkMembership = async (id) => {
+    const {rows} = await pool.query('select membership from users where id = $1', [id])
+    return rows[0]
+}
