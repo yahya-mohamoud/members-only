@@ -7,21 +7,31 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="form">
-        <h2>Please register</h2>
+    <main class="login">
+        <h1 class="lg-header">Welcome to <span>Destiny club house</span></h1>
+    <div class="signupContainer formContainer">
         <form action="/auth/signup" method="post">
-            <label for="firstname">First name</label>
+            <h2>Please Sign-up</h2>
+             <% if(errors && errors.length > 0 ) { %>
+                <ul>
+                    <% errors.forEach(function (err) {  %>
+                        <li class="error"><%= err.msg%></li>
+                    <%})%>
+                </ul>
+          <%}%>
+        <label for="firstname">First name</label>
         <input type="text" name="firstname" id="firstname" required placeholder="first name">
         <label for="lastname">Last name</label>
         <input type="text" name="lastname" id="lastname" required placeholder="lastname">
         <label for="username">Username</label>
         <input type="text" name="username" placeholder="username" id="username" required>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" required minlength="8">
-        <!-- <label for="confirm">Confirm Password</label>
-        <input type="password" name="confirm" id="confirm" required> -->
+        <input type="password" name="password" id="password" placeholder="********" required minlength="8">
         <button type="submit" class="btn submit">Submit</button>
+        <p>You have an account <a href="/auth/login"> Sig-in here</a></p>
     </form>
 </div>
+    </main>
+
 </body>
 </html>

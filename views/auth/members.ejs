@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <%- include('../partials/navbar.ejs',{ user: user })%>
+    <%- include('../partials/navbar.ejs',{ user: user, isMember: false})%>
     <section class="members">
         <h1>So you want to join this club</h1>
-        <p>Destiny Club House is a club you can <em>join</em>, you are allowed to <em>join</em> this club if you have the passkey or the secret code.</p>
-        <p>if you are new to here or doesn't have a passkey just re-read this paragraphs and search the passkey.</p>
+       <p>Answer this question to join</p>
+       <p> year did the JavaScript language </p>
+        
         <p>If you have the secret passkeys insert the input below</p>
             <form  class="joinForm" action="/auth/join" method="post">
                 <label for="join">Insert the keys here: </label>

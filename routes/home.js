@@ -6,12 +6,17 @@ dayjs.extend(relativeTime)
 
 export const home = async (req, res) => {
     const { rows } = await getAllMessages()
-    const id = req.user.id;
     
-     const user = req.user;
+    if (!req.user) {
+        return res.redirect('/auth/login')
+    }
+
+    const user = req.user;
+    const id = req.user.id;
+    const result = await getAdmin(id)                
+    
     const {membership} = await checkMembership(id)
-    const result = await getAdmin(id) 
-    const isAdmin = result.rows[0].isAdmin;
+    const isAdmin = result.rows[0].isAdmin; 
     
     if(isAdmin) {
         res.render('index', { messages: rows, dayjs: dayjs, isMember: membership, admin: isAdmin, user: user})

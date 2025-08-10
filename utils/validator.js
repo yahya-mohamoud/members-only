@@ -3,27 +3,13 @@ import { body, validationResult } from "express-validator";
 const isAlphaErr = 'Name must be an alphabet'
 const isLengthErr = 'Password must be 8 or greater'
 
-const validateUser = [
-    // body('firstname')
-    //     .trim()
-    //     .notEmpty()
-    //     .withMessage('name can not be empty.')
-    //     .isAlpha()
-    //     .withMessage(isAlphaErr),
-    
-    // body("lastname")
-    //     .trim()
-    //     .notEmpty()
-    //     .withMessage("name can not be empty")
-    //     .isAlpha()
-    //     .withMessage(isAlphaErr),
+export const  loginValidator = [
+  
     
     body('username')
         .trim()
         .notEmpty()
-        .withMessage("username can not be empty")
-        .isAlpha()
-        .withMessage(isAlphaErr), 
+        .withMessage("username can not be empty"),  
         
     body('password')
         .trim()
@@ -40,4 +26,31 @@ const validateUser = [
     //     .withMessage(isLengthErr)
 ]
 
-export default validateUser
+export const sigupValidator = [
+   body('firstname')
+        .trim()
+        .notEmpty()
+        .withMessage('firstname can not be empty.')
+        .isAlpha()
+        .withMessage('firstname must be an alphabet'),
+    
+    body("lastname")
+        .trim()
+        .notEmpty()
+        .withMessage("lastname can not be empty")
+        .isAlpha()
+        .withMessage('lastname must be an alphabet'),
+
+     body('username')
+        .trim()
+        .notEmpty()
+        .withMessage("username can not be empty"),
+        
+    body('password')
+        .trim()
+        .notEmpty()
+        .withMessage('password cann\'t be empty')
+        .isLength({ min: 8})
+        .withMessage(isLengthErr),
+]
+ export default {sigupValidator, loginValidator}

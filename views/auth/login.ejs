@@ -9,24 +9,31 @@
 </head>
 
 <body>
-    <div class="form">
-        <h2>Please login</h2>
-        <% if(errors && errors.length > 0 ) { %>
+    <main class="login">
+
+        <h1 class="lg-header">Welcome to <span>Destiny club house</span></h1>
+
+    <div class="formContainer">
+       
+        <form action="/auth/login" method="post">
+            <h1>Login to proceed</h1>
+             <% if(errors && errors.length > 0 ) { %>
                 <ul>
                     <% errors.forEach(function (err) {  %>
                         <li class="error"><%= err.msg%></li>
                     <%})%>
                 </ul>
           <%}%>
-        <form action="/auth/login" method="post">
             <label for="username">Username</label>
             <input type="text" name="username" placeholder="username" id="username" required>
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required minlength="8">
+            <input type="password" name="password" id="password" required minlength="8" placeholder="*********">
             <button type="submit" class="btn submit">Submit</button>
+            <p>Don't have an account yet <a href="/auth/signup">Create One</a></p>
         </form>
-          
-    </div>
+    </div>  
+    </main>
+
 </body>
 
 </html>

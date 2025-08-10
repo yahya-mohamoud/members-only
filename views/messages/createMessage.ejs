@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create message</title>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+    </style>
 </head>
 <body>
-    <%- include('../partials/navbar.ejs')%>
+    <%- include('../partials/navbar.ejs', {isMember: isMember})%>
 
-    <section class="messageForm">
-        <h2>Create Message</h2>
-        <form action="/messages/create" method="post">
+    <section class="messageForm formContainer">
+        <form  action="/messages/create" method="post">
+            <h2>Write a Message</h2>
             <label for="message">Message</label>
-            <textarea name="message" id="message"></textarea>
-            <button type="btn submit">Submit</button>
+            <textarea name="message" id="message" placeholder="Write a message to send"></textarea>
+            <button class="btn" type="submit">Submit</button>
         </form>
     </section>
 </body>

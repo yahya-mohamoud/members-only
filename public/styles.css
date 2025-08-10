@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+
 :root{
     --light-cl: hsl(231, 37%, 93%);
     --light-cl-2: hsl(73, 76%, 95%);
     --light-cl-3: hsl(183, 76%, 95%);
+    --light-cl-4: hsl(183, 71%, 74%);
     --white-cl: #fff;
     --black-cl: #000;
     --submit-btn-cl: rgb(5, 140, 243);
@@ -17,8 +20,16 @@
     margin: 0;
 }
 
+html {
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: rgb(235, 235, 235);
+    min-height: 100vh;
+}
+
 body{
    background-color: var(--white-cl);
+   min-height: 100vh;
 }
 /* navbar styles */
 nav{
@@ -54,7 +65,10 @@ nav ul {
 }
 
 nav h1 {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    font-family: "Megrim", system-ui;
+    font-weight: 800;
+
 }
 .hidden {
     display: none;
@@ -96,40 +110,65 @@ h1, h2, h3 {
     font-size: 2rem;
 }
 
-.form {
-    width: min(80%, 400px);
-    height: min(80%, 400px);
+.login {
     background-color: var(--light-cl);
-    margin: 6rem auto;
-    /* padding: 2rem 1.5rem; */
-    border-radius: 8px;
+    min-height: 100vh;
 }
 
-.form h2 {
+.lg-header {
+    padding: 1rem;
+    text-align: center;
+}
+
+.formContainer {
+    margin: 2rem auto;
+    border-radius: 8px;
+    width: clamp(300px, 50%,600px);
+}
+
+.formContainer p {
+    font-size: 1.2rem;
+    padding: 8px;
+}
+
+.formContainer h2 {
     text-align: center;
     padding-top: 1rem;
 }
 
 .error {
     list-style: none;
-    margin: 0.5rem 2rem;
     color: red;
     font-size: 1.2rem;
 }
 
-.form form {
+.formContainer form {
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
     padding: 0rem 2rem;
     font-size: 1.3rem;
+    background-color: var(--white-cl);
+    box-shadow: 1px 1px 4px 2px rgb(159, 159, 242);
+    border-radius: 1rem;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+form .submit {
+    width: 100%;
+}
+
+form h1 {
+    padding: 10px 0;
 }
 
  form label, form input {
     height: 32px;
     border-radius: 4px;
     outline-color: var(--light-black);
-    border: none;
+    /* border: none; */
 }
 
 input::placeholder {
@@ -156,7 +195,6 @@ input {
 
 .btn:hover {
     background-color: hsl(206, 94%, 45%);
-    transform: translate(3px, -3px);
 }
 
 /* message style starts here */
@@ -176,6 +214,8 @@ input {
 }
 .messages h2 {
     font-size: 1.4rem;
+    font-family: 'noto sans', sans-serif;
+
 }
 .messageData {
     font-size: 1.25rem;
@@ -204,6 +244,11 @@ input {
     display: block;
     margin: .4rem auto;
 }
+
+.create:hover {
+    background-color: rgb(68, 35, 132);
+
+}
 /* index css starts here */
 .intro {
     display: flex;
@@ -214,7 +259,10 @@ input {
     background-color: var(--light-cl);
     padding: 2rem 1rem;
     border-radius: 1rem;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    /* flex-wrap: wrap; */
+    font-size: 1.24rem;
+    font-family: 'grenze', serif;
 }
 .intro p {
     width: min(40vw, 60ch);
@@ -260,10 +308,11 @@ input {
 }
 
 .messagesContainer{
-    background-color: var(--light-cl-3);
+    background-color: var(--light-cl-);
     margin: 1rem;
     padding: 1rem;
     border-radius: 1rem;
+
 }
 
 .messagesContainer .h2 {
@@ -299,4 +348,33 @@ em {
 
 .err {
     color: red;
+}
+
+
+@media (max-width: 500px) {
+    .name {
+        display: none;
+    }
+
+    .halfedTitle {
+        display: none;
+    }
+
+    .intro h1 {
+        text-align: center;
+    }
+
+    .intro p {
+        margin: 0 auto;
+    }
+
+    .intro {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .btn {
+        margin: 0 auto;
+    }
 }

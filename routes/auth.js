@@ -2,9 +2,10 @@ import { Router } from "express";
 import bcrypt from "bcryptjs";
 import pool from "../db/pool.js";
 import passport from "passport";
-import validateUser from "../utils/validator.js";
 import { validationResult } from "express-validator";
 import { addNewUsers, checkMembership, getUserByUsername, updateMembership } from "../db/queries.js";
+import { loginValidator, sigupValidator } from "../utils/validator.js";
+import { checkAuth } from "../middlewares.js";
 
 const authRouter = Router()
 
@@ -13,7 +14,7 @@ authRouter.get('/login', (req, res) => {
 })
 
 authRouter.post('/login',
-    validateUser,
+    loginValidator,
     (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -49,10 +50,20 @@ authRouter.post('/login',
 );
 
 authRouter.get('/signup', (req, res) => {
-    res.render('./auth/signup')
+    res.render('./auth/signup', {errors: []})
 })
 
-authRouter.post('/signup', async (req, res, next) => {
+authRouter.post('/signup',
+    sigupValidator,
+    async (req, res, next) => {
+           const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(401).render('./auth/signup', {
+                errors: errors.array(),
+                user: req.body.username
+            });
+        }
+    
     const {firstname, lastname, username} = req.body
     
     try {
@@ -71,7 +82,7 @@ authRouter.get('/logout', (req, res, next) => {
     res.redirect('/auth/login')
 })
 
-authRouter.get('/join', (req, res) => {
+authRouter.get('/join', checkAuth, (req, res) => {
     const user = req.user;
     res.render('./auth/members', {msg: '', isMember: false, user: user})
 })
@@ -81,9 +92,8 @@ authRouter.post('/join', async (req, res) => {
     const id = req.user.id;
     const user = req.user;
     const {membership} = await checkMembership(id);
-    const result = await checkMembership(id);
         
-    if (passkey === 'join' && membership === false) {
+    if (passkey === 'join' && membership === null) {
         await updateMembership(id)
         
         res.redirect('/messages')

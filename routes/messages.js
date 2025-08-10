@@ -27,7 +27,10 @@ MessRouter.get('/',async (req, res) => {
 })
 
 MessRouter.get('/create', async (req, res) => {
-    res.render('./messages/createMessage')
+    const id =  req.user.id;
+    const user = req.user;
+    const {membership} = await checkMembership(id)
+    res.render('./messages/createMessage', {isMember: membership, user: user})
 })
 
 MessRouter.post('/create', async (req, res) => {

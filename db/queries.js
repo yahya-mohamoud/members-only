@@ -14,7 +14,7 @@ export const getUserByUsername = async (username) => {
 }
 
 export const getAllMessages= async () => {
-   return  await pool.query('select * from messages join users on messages.userid = users.id', )
+   return  await pool.query('select *, messages.created_at as time from messages join users on messages.userid = users.id', )
 }
 
 export const addNewMessages = async (message, userId) =>{
