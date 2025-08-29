@@ -10,17 +10,20 @@
     <%- include('../partials/navbar.ejs',{ user: user, isMember: false})%>
     <section class="members">
         <h1>So you want to join this club</h1>
+        <br>
        <p>Answer this question to join</p>
-       <p> year did the JavaScript language </p>
+       <br>
+       <div class="question">
+        <p>Which company originally developed JavaScript?</p>
+       </div>
         
-        <p>If you have the secret passkeys insert the input below</p>
             <form  class="joinForm" action="/auth/join" method="post">
-                <label for="join">Insert the keys here: </label>
+                <label for="join">Insert your answer here: </label>
                 <%if(msg !== undefined && msg !== '') {%>
                     <li class="err"><%= msg %></li>
                     <p><a href="/messages">see messages here</a></p>
                 <%}%>
-                <input type="text" id="join" name="passkey" placeholder="Insert the Passkey">
+                <input type="text" id="join" name="passkey" placeholder="Your answer here">
                 <button type="submit" class="btn">Submit</button>
             </form>
        

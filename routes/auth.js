@@ -93,14 +93,14 @@ authRouter.post('/join', async (req, res) => {
     const user = req.user;
     const {membership} = await checkMembership(id);
         
-    if (passkey === 'join' && membership === null) {
+    if (passkey === 'netscape' && membership === null) {
         await updateMembership(id)
         
         res.redirect('/messages')
 
-    } else if( membership == true && passkey == 'join')  {
+    } else if( membership == true && passkey == 'netscape')  {
         res.render('./auth/members', {msg: 'members can\'t rejoin, you are already a member', user: user, isMember: membership})
-    } else if (passkey !== 'join') {
+    } else if (passkey.toLowerCase() !== 'netscape') {
         res.render('./auth/members', {msg: 'Incorrect passkey, please try again', user: user, isMember: membership})
     }
     
